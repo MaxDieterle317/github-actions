@@ -33,8 +33,8 @@ describe("Tests to the \"/\" endpoint", () => {
         expect(res.data.timestamp).to.be.within(now - 5000, now);
     });
     it("should return a minified JSON object.", async () => {
-        const res = await axios(`http://${dockerBridgeIP}:80/`);
-        // TODO: Finish this test
-        throw new Error("TypeError: Object(...) is not a function");
+        const res = await axios(`http://${dockerBridgeIP}:80/`, {responseType: "text"});
+        const minifiedObj = JSON.stringify(JSON.parse(res.data));
+        expect(res.data).to.equal(minifiedObj);
     });
 });
